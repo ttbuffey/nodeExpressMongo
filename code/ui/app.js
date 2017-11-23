@@ -18,16 +18,18 @@ var db=mongoose();
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
 // app.engine('.html', require('ejs').__express);
-// app.set('view engine', 'html');
-app.set('views', path.join(__dirname, './'));
-app.engine('.html', require('ejs').__express);
 app.set('view engine', 'html');
+// app.engine('.html', require('ejs').__express);
+// app.set('view engine', 'html');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+
+// 目录为demo/public/images，访问
+// 网址则显示为http://localhost:3000/images
+ app.use(express.static(path.join(__dirname, './')));
 
 
 //这里周期只设置为20秒，为了方便测试
@@ -73,24 +75,24 @@ app.use(function(req, res, next) {
 // error handlers
 // development error handler
 // will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('website/index/error', {
-      message: err.message,
-      error: err
-    });
-  });
-}
+// if (app.get('env') === 'development') {
+//   app.use(function(err, req, res, next) {
+//     res.status(err.status || 500);
+//     res.render('website/index/error', {
+//       message: err.message,
+//       error: err
+//     });
+//   });
+// }
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('website/index/error', {
-    message: err.message,
-    error: {}
-  });
-});
+// app.use(function(err, req, res, next) {
+//   res.status(err.status || 500);
+//   res.render('website/index/error', {
+//     message: err.message,
+//     error: {}
+//   });
+// });
 
 module.exports = app;
